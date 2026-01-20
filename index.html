@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI 기반 장난 추천 서비스. 친구, 동료, 연인에게 할 수 있는 창의적이고 안전한 장난을 추천해드립니다.">
   <title>조지기 마스터 - Prank Master</title>
   <link href='/style.css' rel='stylesheet'>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +31,6 @@
         <div class="section">
           <h3 id="targetTitle">🎯 누구를 조질까?</h3>
           <div class="btn-group" id="targetGroup">
-            <!-- data-value는 내부 로직용(불변), 텍스트는 JS로 변경 -->
             <button class="select-btn active" data-value="친구"><span data-t="friend">친구</span></button>
             <button class="select-btn" data-value="직장동료"><span data-t="coworker">직장동료</span></button>
             <button class="select-btn" data-value="연인"><span data-t="partner">연인</span></button>
@@ -64,10 +64,38 @@
         <div id="resultText" class="markdown-body"></div>
         <button id="retryBtn" class="btn-secondary hidden">다른 작전 줘</button>
       </div>
+
+      <!-- 애드센스용 콘텐츠 보강 섹션 (중요!) -->
+      <article class="info-article">
+        <h3 data-t="infoTitle1">🛡️ 안전한 장난을 위한 3가지 원칙</h3>
+        <p data-t="infoDesc1">
+          장난은 서로 웃을 수 있을 때만 의미가 있습니다. '조지기 마스터'는 다음과 같은 원칙을 준수하는 장난만을 권장합니다.
+          첫째, 절대 <strong>신체적인 고통</strong>을 주지 않아야 합니다.
+          둘째, 상대방의 <strong>컴플렉스</strong>를 건드리지 않습니다.
+          셋째, 분위기가 싸해지면 즉시 <strong>사과하고 원상복구</strong>합니다.
+        </p>
+        
+        <h3 data-t="infoTitle2">🤖 AI가 추천하는 맞춤형 유머</h3>
+        <p data-t="infoDesc2">
+          우리는 최신 Google Gemini AI 기술을 활용하여 상황에 맞는 창의적인 아이디어를 제공합니다. 
+          매일 똑같은 레퍼토리의 장난이 지겹다면, 매운맛 조절 기능을 통해 색다른 즐거움을 찾아보세요.
+          친구와의 내기, 회식 자리의 아이스브레이킹, 연인과의 소소한 이벤트 등 다양한 상황에서 활용할 수 있습니다.
+        </p>
+
+        <h3 data-t="infoTitle3">💡 사용 꿀팁</h3>
+        <p data-t="infoDesc3">
+          결과가 마음에 들지 않거나 상황에 맞지 않는다면 '다른 작전 줘' 버튼을 눌러보세요. 
+          AI가 이전과 다른 새로운 접근 방식의 아이디어를 무제한으로 생성해드립니다.
+        </p>
+      </article>
+
     </main>
     
     <footer>
-      Powered by Gemini API & Cloudflare Pages
+      <div class="footer-links">
+        <a href="/privacy.html" data-t="privacyLink">개인정보처리방침</a>
+      </div>
+      <p>Powered by Gemini API & Cloudflare Pages</p>
     </footer>
   </div>
   <script defer type="text/javascript" src="/main.js"></script>

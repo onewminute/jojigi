@@ -35,7 +35,14 @@ const translations = {
     mild: "😇 Mild",
     medium: "😏 Medium",
     spicy: "🥵 Spicy",
-    langBtn: "🇰🇷 한국어"
+    langBtn: "🇰🇷 한국어",
+    infoTitle1: "🛡️ 3 Rules for Safe Pranking",
+    infoDesc1: "Pranks are only meaningful when everyone can laugh. 'Prank Master' recommends only pranks that follow these principles. First, never cause physical pain. Second, do not touch the other person's complex. Third, if the atmosphere gets cold, apologize immediately and restore it.",
+    infoTitle2: "🤖 Custom Humor Recommended by AI",
+    infoDesc2: "We use the latest Google Gemini AI technology to provide creative ideas tailored to the situation. If you are tired of the same repertoire of pranks every day, try finding different fun through the intensity control function. You can use it in various situations such as bets with friends, ice breaking at company dinners, and small events with lovers.",
+    infoTitle3: "💡 Tips for Use",
+    infoDesc3: "If you don't like the result or it doesn't fit the situation, try clicking the 'Give me another one' button. AI will generate unlimited new ideas with a different approach than before.",
+    privacyLink: "Privacy Policy"
   }
 };
 

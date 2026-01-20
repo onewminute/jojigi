@@ -48,7 +48,11 @@ body {
   max-width: 600px;
   width: 100%;
   text-align: center;
-  margin-top: 40px; /* Space for lang button on mobile */
+  margin-top: 40px;
+}
+
+.text-left {
+  text-align: left;
 }
 
 header h1 {
@@ -208,6 +212,55 @@ header p {
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: keep-all;
+}
+
+/* Info Article for AdSense Quality */
+.info-article {
+  margin-top: 4rem;
+  text-align: left;
+  background: rgba(0,0,0,0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  color: #d2dae2;
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+
+.info-article h3 {
+  color: var(--accent);
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+.content-box {
+  background: rgba(255,255,255,0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+.content-box h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+}
+
+footer {
+  margin-top: 3rem;
+  color: #7f8fa6;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: #a4b0be;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 @keyframes spin {
