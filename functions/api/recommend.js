@@ -69,7 +69,7 @@ export async function onRequest(context) {
   const intensityDesc = intensityMap[intensity] || intensityMap['mild'];
   const typeDesc = typeMap[type] || typeMap['classic'];
 
-  const modelName = "gemini-pro";
+  const modelName = "gemini-1.5-flash";
   const apiVersion = "v1beta";
   
   // Prompt Construction based on Language
