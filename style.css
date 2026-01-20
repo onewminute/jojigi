@@ -152,19 +152,28 @@ header p {
 }
 
 .btn-secondary {
-  background-color: transparent;
-  border: 2px solid var(--text);
-  color: var(--text);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
+  background-color: var(--accent);
+  border: none;
+  color: var(--secondary);
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
   cursor: pointer;
-  margin-top: 1rem;
-  font-family: 'Do Hyeon', sans-serif;
+  margin-top: 1.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  transition: all 0.2s;
+  width: 100%;
+  box-shadow: 0 4px 0 #cc8400;
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: #ffb121;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
 .result-card {
