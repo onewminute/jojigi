@@ -204,12 +204,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Loading State Logic
+  let loadingInterval;
+  const loadingMessages = {
+    ko: [
+      "😈 타겟의 약점을 스캔하는 중...",
+      "🧪 매운맛 소스 배합 중...",
+      "🧠 AI가 사악한 회로를 돌리는 중...",
+      "💣 완벽한 타이밍 계산 중...",
+      "👻 친구의 멘탈 내구도 확인 중...",
+      "📜 장난의 신에게 기도하는 중..."
+    ],
+    en: [
+      "😈 Scanning target's weakness...",
+      "🧪 Mixing spicy sauce...",
+      "🧠 AI runs evil circuits...",
+      "💣 Calculating perfect timing...",
+      "👻 Checking mental durability...",
+      "📜 Consulting the Prank Gods..."
+    ]
+  };
+
+  function startLoadingAnimation() {
+    loading.classList.remove('hidden');
+    const msgs = loadingMessages[state.lang];
+    let idx = 0;
+    
+    // Initial set
+    const loadingTextEl = document.getElementById('loadingText');
+    loadingTextEl.textContent = msgs[0];
+
+    loadingInterval = setInterval(() => {
+      idx = (idx + 1) % msgs.length;
+      loadingTextEl.style.opacity = 0; // Fade out
+      setTimeout(() => {
+        loadingTextEl.textContent = msgs[idx];
+        loadingTextEl.style.opacity = 1; // Fade in
+      }, 300);
+    }, 2000); // Change every 2 seconds
+  }
+
+  function stopLoadingAnimation() {
+    loading.classList.add('hidden');
+    clearInterval(loadingInterval);
+  }
+
   recommendBtn.addEventListener('click', fetchPrank);
   retryBtn.addEventListener('click', fetchPrank);
 
   async function fetchPrank() {
     resultArea.classList.remove('hidden');
-    loading.classList.remove('hidden');
+    startLoadingAnimation();
+    
     resultText.innerHTML = '';
     retryBtn.classList.add('hidden');
     shareContainer.classList.add('hidden'); // Hide share while loading
@@ -252,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ${error.message}<br>
       </div>`;
     } finally {
-      loading.classList.add('hidden');
+      stopLoadingAnimation();
       recommendBtn.disabled = false;
     }
   }

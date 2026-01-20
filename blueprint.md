@@ -11,6 +11,10 @@ AI-powered Prank Recommendation Service. Users can select a target, style, and i
 - **Multi-language Support:** Korean and English.
 - **Dark Mode UI:** Modern, responsive design with animations.
 
+## Recent Updates
+- **Enhanced Loading Animation:** Replaced simple spinner with a pulsing "Mischievous Devil" animation and dynamic funny text cycling (e.g., "Mixing spicy sauce...").
+- **Open Graph Support:** Added `og-banner.png` for social media sharing.
+
 ## Current Task: Enhance Open Graph (Social Sharing) - COMPLETED
 **Goal:** Make the link preview "pretty" when shared on social media.
 
