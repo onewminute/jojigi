@@ -259,16 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Share Functions ---
 
-  function getShareText() {
-    // Use innerText to preserve line breaks and visual formatting
-    const rawText = resultText.innerText; 
-    const t = translations[state.lang];
-    return `${t.shareTitle}\n\n${rawText}\n\n👉 https://jojigi.pages.dev/?lang=${state.lang}`;
+  function getShareUrl() {
+    return `https://jojigi.pages.dev/?lang=${state.lang}`;
   }
 
   function copyToClipboard() {
-    const text = getShareText();
-    navigator.clipboard.writeText(text).then(() => {
+    const url = getShareUrl();
+    navigator.clipboard.writeText(url).then(() => {
       const t = translations[state.lang];
       alert(t.copySuccess);
     }).catch(err => {
@@ -277,31 +274,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function shareNative() {
-    const text = getShareText();
     const t = translations[state.lang];
+    const url = getShareUrl();
     if (navigator.share) {
       navigator.share({
         title: t.headerTitle,
-        text: text,
-        url: `https://jojigi.pages.dev/?lang=${state.lang}`
+        text: t.headerDesc.split('\n')[0], // Short description
+        url: url
       }).catch(console.error);
     } else {
-      // Fallback if native share not supported
+      // Fallback
       copyToClipboard();
     }
   }
 
   function shareTwitter() {
-    const text = getShareText();
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    const t = translations[state.lang];
+    const text = t.headerTitle; // Simple title
+    const url = getShareUrl();
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(twitterUrl, '_blank');
   }
 
   function shareReddit() {
-    const rawText = resultText.innerText;
     const t = translations[state.lang];
-    const title = t.shareTitle.replace(': ', '');
-    const url = `https://www.reddit.com/submit?title=${encodeURIComponent(title)}&text=${encodeURIComponent(rawText + '\n\n👉 https://jojigi.pages.dev/?lang=' + state.lang)}`;
-    window.open(url, '_blank');
+    const title = t.headerTitle;
+    const url = getShareUrl();
+    const redditUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+    window.open(redditUrl, '_blank');
   }
 });
