@@ -62,12 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const retryBtn = document.getElementById('retryBtn');
   const langBtn = document.getElementById('langBtn');
 
+  // Detect initial language
+  const urlParams = new URLSearchParams(window.location.search);
+  const browserLang = navigator.language || navigator.userLanguage;
+  const initialLang = urlParams.get('lang') || (browserLang.startsWith('en') ? 'en' : 'ko');
+
   // State
   let state = {
     target: '친구',
     type: 'classic',
     intensity: 'mild',
-    lang: 'ko' // 'ko' or 'en'
+    lang: initialLang
   };
 
   // Setup Selection Logic
@@ -77,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Setup Lang Switch
   langBtn.addEventListener('click', toggleLanguage);
+
+  // Initial UI Update
+  updateUI();
 
   function setupSelection(groupId, callback) {
     const group = document.getElementById(groupId);
@@ -94,11 +102,33 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleLanguage() {
     state.lang = state.lang === 'ko' ? 'en' : 'ko';
     updateUI();
+    // Optional: Update URL without reloading
+    const newUrl = new URL(window.location);
+    newUrl.searchParams.set('lang', state.lang);
+    window.history.pushState({}, '', newUrl);
   }
 
   function updateUI() {
     const t = translations[state.lang];
     
+    // Update HTML lang attribute
+    document.documentElement.lang = state.lang;
+
+    // Update Meta Description & Title
+    document.title = state.lang === 'en' ? 'Prank Master - Escape Boredom!' : '조지기 마스터 - 노잼 탈출!';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.content = state.lang === 'en' 
+        ? "AI-powered Prank Recommendation Service. Creative and safe pranks for friends, coworkers, and partners." 
+        : "AI 기반 장난 추천 서비스. 친구, 동료, 연인에게 할 수 있는 창의적이고 안전한 장난을 추천해드립니다.";
+    }
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) {
+      ogDesc.content = state.lang === 'en'
+        ? "Add a spoonful of spice to your boring daily life! Creative and safe pranks recommended by AI."
+        : "지루한 일상에 매운맛 한 스푼! AI가 추천하는 기발하고 안전한 장난.";
+    }
+
     // Static IDs
     document.getElementById('headerTitle').textContent = t.headerTitle;
     document.getElementById('headerDesc').textContent = t.headerDesc;
