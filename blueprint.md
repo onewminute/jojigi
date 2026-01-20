@@ -11,10 +11,11 @@ AI-powered Prank Recommendation Service. Users can select a target, style, and i
 - **Multi-language Support:** Korean and English.
 - **Dark Mode UI:** Modern, responsive design with animations.
 
-## Current Task: Enhance Open Graph (Social Sharing)
+## Current Task: Enhance Open Graph (Social Sharing) - COMPLETED
 **Goal:** Make the link preview "pretty" when shared on social media.
 
-**Plan:**
-1.  **Create Custom OG Image:** Generate a 1200x630 SVG banner (`og-banner.svg`) matching the site's dark theme and branding.
-2.  **Update HTML:** Modify `index.html` to point to the new image and ensure all OG tags are correct and optimized.
-3.  **Note:** Advise user to convert SVG to PNG for maximum compatibility if needed.
+**Completed Steps:**
+1.  **Created Custom OG Image:** Generated `og-banner.svg` and subsequently `og-banner.png` for maximum compatibility.
+2.  **Updated HTML:** Modified `index.html` and `about.html` to point to `og-banner.png`.
+3.  **Deployment:** Pushed all changes to the repository.
+
