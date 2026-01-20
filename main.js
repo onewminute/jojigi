@@ -256,9 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Share Functions ---
 
   function getShareText() {
-    const rawText = resultText.textContent;
-    // Extract title if possible (assuming Markdown format or similar structure)
-    // Or just use the whole text.
+    // Use innerText to preserve line breaks and visual formatting
+    const rawText = resultText.innerText; 
     const t = translations[state.lang];
     return `${t.shareTitle}\n\n${rawText}\n\n👉 https://jojigi.pages.dev/?lang=${state.lang}`;
   }
