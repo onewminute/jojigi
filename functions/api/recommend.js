@@ -20,11 +20,11 @@ export async function onRequest(context) {
   }
 
   // 환경변수 확인 (여러 경로 체크)
-  const apiKey = env.GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : undefined);
+  const apiKey = env.JOJIGI_API_KEY || (typeof process !== 'undefined' ? process.env.JOJIGI_API_KEY : undefined);
   
   if (!apiKey) {
     return new Response(JSON.stringify({ 
-      error: "API Key 미설정: Cloudflare 대시보드의 'Settings > Functions > Environment variables'에 GEMINI_API_KEY를 등록했는지 확인해주세요. (Production/Preview 모두 등록 권장)" 
+      error: "API Key 미설정: Cloudflare 대시보드의 'Settings > Functions > Environment variables'에 JOJIGI_API_KEY를 등록했는지 확인해주세요. (Production/Preview 모두 등록 권장)" 
     }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" }
