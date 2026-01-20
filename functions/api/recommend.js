@@ -1,11 +1,33 @@
-export async function onRequestPost(context) {
+export async function onRequest(context) {
   const { request, env } = context;
+  
+  // CORS 처리를 위한 헤더
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
 
-  const apiKey = env.GEMINI_API_KEY;
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), { 
+      status: 405, 
+      headers: { ...corsHeaders, "Content-Type": "application/json" } 
+    });
+  }
+
+  // 환경변수 확인 (여러 경로 체크)
+  const apiKey = env.GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : undefined);
+  
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: "API Key가 설정되지 않았습니다." }), {
+    return new Response(JSON.stringify({ 
+      error: "API Key 미설정: Cloudflare 대시보드의 'Settings > Functions > Environment variables'에 GEMINI_API_KEY를 등록했는지 확인해주세요. (Production/Preview 모두 등록 권장)" 
+    }), {
       status: 500,
-      headers: { "Content-Type": "application/json" }
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
   }
 
@@ -26,20 +48,21 @@ export async function onRequestPost(context) {
     });
 
     if (!response.ok) {
-      throw new Error(`Gemini API Error: ${response.statusText}`);
+      const errText = await response.text();
+      throw new Error(`Gemini API Error: ${response.status} - ${errText}`);
     }
 
     const data = await response.json();
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || "조지기 마스터가 잠시 자리를 비웠어. 다시 시도해봐!";
 
     return new Response(JSON.stringify({ recommendation: generatedText }), {
-      headers: { "Content-Type": "application/json" }
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
 
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
-      headers: { "Content-Type": "application/json" }
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
   }
 }
