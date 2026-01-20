@@ -3,15 +3,19 @@
   --primary-dark: #e84118;
   --secondary: #2f3542;
   --bg: #1e272e;
-  --text: #ffffff; /* 더 선명하게 순백색으로 변경 */
+  --text: #ffffff;
   --text-dim: #ced6e0;
   --accent: #ffa502;
   --gray: #747d8c;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif; /* 본문은 깔끔한 고딕체 */
+  font-family: 'Noto Sans KR', sans-serif;
   background-color: var(--bg);
+  /* 고급스러운 다크 모드 그라데이션 및 패턴 */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(255, 71, 87, 0.08), transparent 25%), 
+    radial-gradient(circle at 85% 30%, rgba(255, 165, 2, 0.08), transparent 25%);
   color: var(--text);
   margin: 0;
   display: flex;
@@ -19,6 +23,50 @@ body {
   min-height: 100vh;
   padding: 20px;
   line-height: 1.6;
+  overflow-x: hidden; /* 배경 장식 넘침 방지 */
+}
+
+/* Background Decorations (Floating Icons) */
+.bg-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  font-size: 4rem;
+  opacity: 0.1; /* 은은하게 */
+  animation: floatBackground 10s infinite ease-in-out;
+}
+
+.shape-1 { top: 10%; left: 10%; animation-duration: 12s; }
+.shape-2 { top: 20%; right: 15%; animation-duration: 15s; font-size: 3rem; }
+.shape-3 { bottom: 15%; left: 20%; animation-duration: 18s; animation-delay: 2s; }
+.shape-4 { bottom: 10%; right: 10%; animation-duration: 14s; font-size: 5rem; }
+
+@keyframes floatBackground {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* Hero Mascot */
+.hero-mascot {
+  font-size: 6rem;
+  margin-bottom: -10px;
+  filter: drop-shadow(0 0 15px rgba(255, 71, 87, 0.6));
+  animation: bounceMascot 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes bounceMascot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 /* Lang Switcher */
@@ -39,6 +87,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.9rem;
   transition: all 0.2s;
+  backdrop-filter: blur(5px);
 }
 
 #langBtn:hover {
@@ -51,10 +100,11 @@ body {
   width: 100%;
   text-align: center;
   margin-top: 40px;
+  z-index: 1; /* 배경 위에 표시 */
 }
 
 header h1 {
-  font-family: 'Jua', sans-serif; /* 제목은 가독성 좋은 배달의민족 주아체 */
+  font-family: 'Jua', sans-serif;
   font-size: 3.5rem;
   color: var(--primary);
   text-shadow: 2px 2px 0 #000;
@@ -68,12 +118,18 @@ header p {
   font-weight: 400;
 }
 
+/* Glassmorphism Card Style */
+.glass-effect {
+  background: rgba(47, 53, 66, 0.85); /* 반투명 */
+  backdrop-filter: blur(12px); /* 흐림 효과 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
 .card {
-  background: var(--secondary);
   border-radius: 20px;
   padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
 .section {
@@ -95,7 +151,7 @@ header p {
 }
 
 .select-btn {
-  background-color: var(--bg);
+  background-color: rgba(30, 39, 46, 0.8);
   border: 2px solid var(--gray);
   color: var(--text-dim);
   padding: 12px 10px;
@@ -109,6 +165,7 @@ header p {
 .select-btn:hover {
   border-color: var(--primary);
   color: var(--text);
+  background-color: rgba(255, 71, 87, 0.1);
 }
 
 .select-btn.active {
@@ -180,15 +237,14 @@ header p {
 }
 
 .result-card {
-  background: #fff;
   color: #2f3542;
   border-radius: 20px;
   padding: 2.5rem;
   text-align: left;
   margin-top: 2rem;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   position: relative;
   border: 5px solid var(--accent);
+  background: rgba(255, 255, 255, 0.95); /* 결과창은 가독성 위해 밝게 */
 }
 
 .result-card h2 {
@@ -230,7 +286,6 @@ header p {
 .info-article {
   margin-top: 4rem;
   text-align: left;
-  background: rgba(0,0,0,0.3);
   padding: 2.5rem;
   border-radius: 20px;
   color: #ced6e0;
