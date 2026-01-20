@@ -1,7 +1,7 @@
 const translations = {
   ko: {
     headerTitle: "노잼 탈출! 조지기 마스터",
-    headerDesc: "지루한 일상에 매운맛 한 스푼! (*'조지다'는 '장난치다'의 유쾌한 표현입니다)",
+    headerDesc: "지루한 일상에 매운맛 한 스푼!\n(*'조지다'는 '장난치다'의 유쾌한 표현입니다)",
     targetTitle: "🎯 누구를 조질까?",
     intensityTitle: "🔥 장난 강도 (매운맛)",
     recommendBtn: "장난 설계 시작하기",
