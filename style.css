@@ -3,13 +3,14 @@
   --primary-dark: #e84118;
   --secondary: #2f3542;
   --bg: #1e272e;
-  --text: #f1f2f6;
+  --text: #ffffff; /* 더 선명하게 순백색으로 변경 */
+  --text-dim: #ced6e0;
   --accent: #ffa502;
-  --gray: #57606f;
+  --gray: #747d8c;
 }
 
 body {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif; /* 본문은 깔끔한 고딕체 */
   background-color: var(--bg);
   color: var(--text);
   margin: 0;
@@ -17,6 +18,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
+  line-height: 1.6;
 }
 
 /* Lang Switcher */
@@ -28,13 +30,13 @@ body {
 }
 
 #langBtn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: 1px solid var(--gray);
   color: var(--text);
   padding: 8px 15px;
   border-radius: 20px;
   cursor: pointer;
-  font-family: sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.9rem;
   transition: all 0.2s;
 }
@@ -51,57 +53,56 @@ body {
   margin-top: 40px;
 }
 
-.text-left {
-  text-align: left;
-}
-
 header h1 {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 3rem;
+  font-family: 'Jua', sans-serif; /* 제목은 가독성 좋은 배달의민족 주아체 */
+  font-size: 3.5rem;
   color: var(--primary);
   text-shadow: 2px 2px 0 #000;
   margin-bottom: 0.5rem;
+  letter-spacing: -1px;
 }
 
 header p {
-  font-size: 1.2rem;
-  color: #a4b0be;
+  font-size: 1.3rem;
+  color: var(--text-dim);
+  font-weight: 400;
 }
 
 .card {
   background: var(--secondary);
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 20px;
+  padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
 .section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   text-align: left;
 }
 
 .section h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   color: var(--accent);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-family: 'Jua', sans-serif;
 }
 
 .btn-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
 }
 
 .select-btn {
   background-color: var(--bg);
   border: 2px solid var(--gray);
-  color: #a4b0be;
-  padding: 10px;
+  color: var(--text-dim);
+  padding: 12px 10px;
   border-radius: 12px;
   cursor: pointer;
-  font-family: 'Do Hyeon', sans-serif;
-  font-size: 1.1rem;
+  font-family: 'Jua', sans-serif;
+  font-size: 1.2rem;
   transition: all 0.2s;
 }
 
@@ -114,15 +115,15 @@ header p {
   background-color: var(--primary);
   border-color: var(--primary);
   color: white;
-  box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+  box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
   transform: scale(1.05);
 }
 
 .divider {
   height: 2px;
   background-color: var(--gray);
-  margin: 20px 0;
-  opacity: 0.3;
+  margin: 25px 0;
+  opacity: 0.2;
 }
 
 .btn-primary {
@@ -130,18 +131,19 @@ header p {
   background-color: var(--primary);
   color: white;
   border: none;
-  padding: 1rem;
-  font-size: 1.5rem;
-  border-radius: 12px;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  border-radius: 15px;
   cursor: pointer;
-  font-family: 'Black Han Sans', sans-serif;
-  transition: transform 0.1s, box-shadow 0.1s;
-  box-shadow: 0 4px 0 #b33939;
+  font-family: 'Jua', sans-serif;
+  transition: all 0.1s;
+  box-shadow: 0 6px 0 #b33939;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .btn-primary:active {
   transform: translateY(4px);
-  box-shadow: none;
+  box-shadow: 0 2px 0 #b33939;
 }
 
 .btn-primary:disabled {
@@ -154,16 +156,17 @@ header p {
 .btn-secondary {
   background-color: var(--accent);
   border: none;
-  color: var(--secondary);
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
+  color: #000;
+  padding: 1rem 1.5rem;
+  font-size: 1.3rem;
   border-radius: 12px;
   cursor: pointer;
   margin-top: 1.5rem;
-  font-family: 'Black Han Sans', sans-serif;
+  font-family: 'Jua', sans-serif;
   transition: all 0.2s;
   width: 100%;
   box-shadow: 0 4px 0 #cc8400;
+  font-weight: bold;
 }
 
 .btn-secondary:hover {
@@ -178,18 +181,14 @@ header p {
 
 .result-card {
   background: #fff;
-  color: #333;
-  border-radius: 16px;
-  padding: 2rem;
+  color: #2f3542;
+  border-radius: 20px;
+  padding: 2.5rem;
   text-align: left;
   margin-top: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   position: relative;
-  border: 4px solid var(--accent);
-}
-
-.result-card.hidden {
-  display: none;
+  border: 5px solid var(--accent);
 }
 
 .result-card h2 {
@@ -197,7 +196,9 @@ header p {
   margin-top: 0;
   text-align: center;
   border-bottom: 2px dashed #ddd;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  font-family: 'Jua', sans-serif;
+  font-size: 2rem;
 }
 
 #loading {
@@ -207,9 +208,9 @@ header p {
 
 .spinner {
   display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0,0,0,0.1);
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0,0,0,0.1);
   border-radius: 50%;
   border-top-color: var(--primary);
   animation: spin 1s ease-in-out infinite;
@@ -217,59 +218,45 @@ header p {
 }
 
 .markdown-body {
-  font-family: sans-serif;
-  line-height: 1.6;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
   white-space: pre-wrap;
   word-break: keep-all;
+  font-weight: 500;
 }
 
 /* Info Article for AdSense Quality */
 .info-article {
   margin-top: 4rem;
   text-align: left;
-  background: rgba(0,0,0,0.2);
-  padding: 2rem;
-  border-radius: 16px;
-  color: #d2dae2;
-  font-family: sans-serif;
-  line-height: 1.6;
+  background: rgba(0,0,0,0.3);
+  padding: 2.5rem;
+  border-radius: 20px;
+  color: #ced6e0;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
 }
 
 .info-article h3 {
   color: var(--accent);
-  font-family: 'Do Hyeon', sans-serif;
-  font-size: 1.4rem;
-  margin-top: 1.5rem;
-}
-
-.content-box {
-  background: rgba(255,255,255,0.05);
-  padding: 2rem;
-  border-radius: 16px;
-  margin-top: 2rem;
-  line-height: 1.6;
-}
-
-.content-box h3 {
-  color: var(--accent);
-  margin-top: 1.5rem;
+  font-family: 'Jua', sans-serif;
+  font-size: 1.6rem;
+  margin-top: 1.8rem;
 }
 
 footer {
-  margin-top: 3rem;
-  color: #7f8fa6;
-  font-size: 0.9rem;
+  margin-top: 4rem;
+  padding-bottom: 2rem;
+  color: #747d8c;
+  font-size: 1rem;
 }
 
 .footer-links a {
-  color: #a4b0be;
+  color: #ced6e0;
   text-decoration: none;
-  margin: 0 10px;
-}
-
-.footer-links a:hover {
-  color: var(--primary);
-  text-decoration: underline;
+  margin: 0 15px;
+  font-weight: bold;
 }
 
 @keyframes spin {
@@ -280,9 +267,11 @@ footer {
   display: none !important;
 }
 
-/* Mobile responsive adjustments */
 @media (max-width: 400px) {
   .btn-group {
     grid-template-columns: 1fr 1fr;
+  }
+  header h1 {
+    font-size: 2.5rem;
   }
 }
