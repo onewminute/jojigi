@@ -37,7 +37,8 @@ export async function onRequest(context) {
   말투는 장난끼 넘치고 친근하게 해줘.`;
 
   try {
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-002:generateContent?key=${apiKey}`;
+    // 모델 버전을 구체적인 001 버전으로 지정 (404 오류 방지)
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=${apiKey}`;
     
     const response = await fetch(geminiUrl, {
       method: "POST",
