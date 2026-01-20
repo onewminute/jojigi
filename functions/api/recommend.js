@@ -35,6 +35,7 @@ export async function onRequest(context) {
   } catch (e) {}
 
   const target = requestData.target || 'friend';
+  const type = requestData.type || 'classic'; // Default to classic
   const intensity = requestData.intensity || 'mild';
   const lang = requestData.lang || 'ko'; // 언어 설정 (기본 ko)
 
@@ -53,7 +54,20 @@ export async function onRequest(context) {
       : '정신적 타격이 꽤 있는 수준. 아주 교묘하고 치밀해서 당하면 멘붕이 오지만, 결코 물리적 피해나 금전적 손해는 없는 "안전한" 범위 내의 혼돈.'
   };
 
+  const typeMap = {
+    'classic': isEn
+      ? 'Classic Prank (Timeless, simple, and proven)'
+      : '클래식 장난 (오랫동안 사랑받은 근본 있고 단순한 장난)',
+    'trendy': isEn
+      ? 'Trendy Prank (Viral, meme-based, modern tech/social media)'
+      : '요즘 유행 장난 (SNS, 밈, 최신 기술을 활용한 트렌디한 장난)',
+    'creative': isEn
+      ? 'Creative Prank (Unexpected, unique, out-of-the-box ideas)'
+      : '신박한 장난 (예상치 못한 기발하고 창의적인 아이디어)'
+  };
+
   const intensityDesc = intensityMap[intensity] || intensityMap['mild'];
+  const typeDesc = typeMap[type] || typeMap['classic'];
 
   const modelName = "gemini-flash-latest";
   const apiVersion = "v1beta";
@@ -67,6 +81,7 @@ export async function onRequest(context) {
     
     [Request]
     - Target: ${target}
+    - Style: ${type} (${typeDesc})
     - Intensity: ${intensity} (${intensityDesc})
     
     [Instructions]
@@ -88,6 +103,7 @@ export async function onRequest(context) {
     
     [요청 내용]
     - 타겟: ${target} (영어 입력일 경우 한국어 문맥에 맞게 해석해: friend->친구, coworker->직장동료 등)
+    - 스타일: ${type} (${typeDesc})
     - 장난 강도: ${intensity} (${intensityDesc})
     
     [지시사항]

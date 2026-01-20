@@ -3,6 +3,7 @@ const translations = {
     headerTitle: "노잼 탈출! 조지기 마스터",
     headerDesc: "지루한 일상에 매운맛 한 스푼!\n(*'조지다'는 '장난치다'의 유쾌한 표현입니다)",
     targetTitle: "🎯 누구를 조질까?",
+    typeTitle: "✨ 장난 스타일",
     intensityTitle: "🔥 장난 강도 (매운맛)",
     recommendBtn: "장난 설계 시작하기",
     resultTitle: "📜 조지기 작전 계획서",
@@ -13,6 +14,9 @@ const translations = {
     coworker: "직장동료",
     partner: "연인",
     family: "가족",
+    classic: "📜 클래식",
+    trendy: "🚀 요즘 유행",
+    creative: "💡 신박한",
     mild: "😇 착한맛",
     medium: "😏 중간맛",
     spicy: "🥵 매운맛",
@@ -22,6 +26,7 @@ const translations = {
     headerTitle: "Escape Boredom! Prank Master",
     headerDesc: "Add a spoonful of spice to your boring daily life!",
     targetTitle: "🎯 Who is the target?",
+    typeTitle: "✨ Prank Style",
     intensityTitle: "🔥 Intensity Level",
     recommendBtn: "Generate Prank Plan",
     resultTitle: "📜 The Master Plan",
@@ -32,6 +37,9 @@ const translations = {
     coworker: "Coworker",
     partner: "Partner",
     family: "Family",
+    classic: "📜 Classic",
+    trendy: "🚀 Trendy",
+    creative: "💡 Creative",
     mild: "😇 Mild",
     medium: "😏 Medium",
     spicy: "🥵 Spicy",
@@ -57,12 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // State
   let state = {
     target: '친구',
+    type: 'classic',
     intensity: 'mild',
     lang: 'ko' // 'ko' or 'en'
   };
 
   // Setup Selection Logic
   setupSelection('targetGroup', (val) => state.target = val);
+  setupSelection('typeGroup', (val) => state.type = val);
   setupSelection('intensityGroup', (val) => state.intensity = val);
   
   // Setup Lang Switch
@@ -93,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('headerTitle').textContent = t.headerTitle;
     document.getElementById('headerDesc').textContent = t.headerDesc;
     document.getElementById('targetTitle').textContent = t.targetTitle;
+    document.getElementById('typeTitle').textContent = t.typeTitle;
     document.getElementById('intensityTitle').textContent = t.intensityTitle;
     document.getElementById('recommendBtn').textContent = t.recommendBtn;
     document.getElementById('resultTitle').textContent = t.resultTitle;
@@ -130,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({
           target: state.target,
+          type: state.type,
           intensity: state.intensity,
           lang: state.lang // Send language state
         })
