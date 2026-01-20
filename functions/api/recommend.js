@@ -70,7 +70,7 @@ export async function onRequest(context) {
   const typeDesc = typeMap[type] || typeMap['classic'];
 
   const modelName = "gemini-1.5-flash";
-  const apiVersion = "v1beta";
+  const apiVersion = "v1";
   
   // Prompt Construction based on Language
   let prompt = "";
