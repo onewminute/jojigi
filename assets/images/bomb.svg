@@ -1,0 +1,20 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bombGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Fuse -->
+  <path d="M50 20 Q 50 5 65 5" fill="none" stroke="#d35400" stroke-width="3"/>
+  <circle cx="65" cy="5" r="2" fill="#e74c3c">
+    <animate attributeName="opacity" values="1;0;1" dur="0.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Body -->
+  <circle cx="50" cy="55" r="35" fill="url(#bombGrad)"/>
+  
+  <!-- Shine -->
+  <ellipse cx="35" cy="40" rx="5" ry="3" fill="#fff" opacity="0.3" transform="rotate(-45 35 40)"/>
+</svg>

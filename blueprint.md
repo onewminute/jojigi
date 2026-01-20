@@ -12,6 +12,7 @@ AI-powered Prank Recommendation Service. Users can select a target, style, and i
 - **Dark Mode UI:** Modern, responsive design with animations.
 
 ## Recent Updates
+- **API Model Update:** Switched from `gemini-flash-latest` to `gemini-1.5-flash` to resolve 429 Resource Exhausted errors and ensure stable operation.
 - **Enhanced Loading Animation:** Replaced simple spinner with a pulsing "Mischievous Devil" animation and dynamic funny text cycling (e.g., "Mixing spicy sauce...").
 - **Open Graph Support:** Added `og-banner.png` for social media sharing.
 

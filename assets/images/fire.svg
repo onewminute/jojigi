@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fireGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#e67e22"/>
+      <stop offset="100%" stop-color="#f1c40f"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 10 Q 70 50 90 60 Q 100 90 50 90 Q 0 90 10 60 Q 30 50 50 10 Z" fill="url(#fireGrad)">
+    <animate attributeName="d" 
+      values="M50 10 Q 70 50 90 60 Q 100 90 50 90 Q 0 90 10 60 Q 30 50 50 10 Z;
+              M50 5 Q 80 50 85 65 Q 95 95 50 90 Q 5 95 15 65 Q 20 50 50 5 Z;
+              M50 10 Q 70 50 90 60 Q 100 90 50 90 Q 0 90 10 60 Q 30 50 50 10 Z" 
+      dur="1s" repeatCount="indefinite"/>
+  </path>
+</svg>
