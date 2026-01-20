@@ -20,7 +20,12 @@ const translations = {
     mild: "😇 착한맛",
     medium: "😏 중간맛",
     spicy: "🥵 매운맛",
-    langBtn: "🇺🇸 English"
+    langBtn: "🇺🇸 English",
+    copyBtn: "복사",
+    shareBtn: "공유",
+    twitterBtn: "트윗",
+    copySuccess: "클립보드에 복사되었습니다!",
+    shareTitle: "조지기 마스터 - 작전명: "
   },
   en: {
     headerTitle: "Escape Boredom! Prank Master",
@@ -50,7 +55,12 @@ const translations = {
     infoDesc2: "We use the latest Google Gemini AI technology to provide creative ideas tailored to the situation. If you are tired of the same repertoire of pranks every day, try finding different fun through the intensity control function. You can use it in various situations such as bets with friends, ice breaking at company dinners, and small events with lovers.",
     infoTitle3: "💡 Tips for Use",
     infoDesc3: "If you don't like the result or it doesn't fit the situation, try clicking the 'Give me another one' button. AI will generate unlimited new ideas with a different approach than before.",
-    privacyLink: "Privacy Policy"
+    privacyLink: "Privacy Policy",
+    copyBtn: "Copy",
+    shareBtn: "Share",
+    twitterBtn: "Tweet",
+    copySuccess: "Copied to clipboard!",
+    shareTitle: "Prank Master - Operation: "
   }
 };
 
@@ -61,6 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const loading = document.getElementById('loading');
   const retryBtn = document.getElementById('retryBtn');
   const langBtn = document.getElementById('langBtn');
+  const shareContainer = document.getElementById('shareContainer');
+  const copyBtn = document.getElementById('copyBtn');
+  const nativeShareBtn = document.getElementById('nativeShareBtn');
+  const twitterShareBtn = document.getElementById('twitterShareBtn');
 
   // Detect initial language
   const urlParams = new URLSearchParams(window.location.search);
@@ -82,6 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Setup Lang Switch
   langBtn.addEventListener('click', toggleLanguage);
+  
+  // Setup Share Buttons
+  copyBtn.addEventListener('click', copyToClipboard);
+  nativeShareBtn.addEventListener('click', shareNative);
+  twitterShareBtn.addEventListener('click', shareTwitter);
 
   // Initial UI Update
   updateUI();
@@ -189,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loading.classList.remove('hidden');
     resultText.innerHTML = '';
     retryBtn.classList.add('hidden');
+    shareContainer.classList.add('hidden'); // Hide share while loading
     recommendBtn.disabled = true;
 
     // Scroll to result
@@ -218,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       resultText.textContent = data.recommendation;
       retryBtn.classList.remove('hidden');
+      shareContainer.classList.remove('hidden'); // Show share buttons
 
     } catch (error) {
       console.error(error);
@@ -230,5 +251,46 @@ document.addEventListener('DOMContentLoaded', () => {
       loading.classList.add('hidden');
       recommendBtn.disabled = false;
     }
+  }
+
+  // --- Share Functions ---
+
+  function getShareText() {
+    const rawText = resultText.textContent;
+    // Extract title if possible (assuming Markdown format or similar structure)
+    // Or just use the whole text.
+    const t = translations[state.lang];
+    return `${t.shareTitle}\n\n${rawText}\n\n👉 https://jojigi.pages.dev/?lang=${state.lang}`;
+  }
+
+  function copyToClipboard() {
+    const text = getShareText();
+    navigator.clipboard.writeText(text).then(() => {
+      const t = translations[state.lang];
+      alert(t.copySuccess);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  }
+
+  function shareNative() {
+    const text = getShareText();
+    const t = translations[state.lang];
+    if (navigator.share) {
+      navigator.share({
+        title: t.headerTitle,
+        text: text,
+        url: `https://jojigi.pages.dev/?lang=${state.lang}`
+      }).catch(console.error);
+    } else {
+      // Fallback if native share not supported
+      copyToClipboard();
+    }
+  }
+
+  function shareTwitter() {
+    const text = getShareText();
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
   }
 });
