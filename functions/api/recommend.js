@@ -29,14 +29,49 @@ export async function onRequest(context) {
     });
   }
 
-  // 진단 목록에 있었던 안정적인 모델 별칭 사용
+  // 요청 데이터 파싱 (대상, 강도)
+  let requestData = {};
+  try {
+    requestData = await request.json();
+  } catch (e) {
+    // JSON 파싱 실패 시 기본값 사용
+  }
+
+  const target = requestData.target || '친구';
+  const intensity = requestData.intensity || 'mild';
+
+  // 강도에 따른 프롬프트 상세 설정
+  const intensityMap = {
+    'mild': '귀엽고 웃긴 수준. 피해가 없고 10초 뒤에 바로 웃을 수 있는 가벼운 장난.',
+    'medium': '킹받지만 용서 가능한 수준. 약간 당황스럽고 해결하는 데 1~5분 정도 걸리는 귀찮은 장난.',
+    'spicy': '정신적 타격이 꽤 있는 수준. 아주 교묘하고 치밀해서 당하면 멘붕이 오지만, 결코 물리적 피해나 금전적 손해는 없는 "안전한" 범위 내의 혼돈.'
+  };
+
+  const intensityDesc = intensityMap[intensity] || intensityMap['mild'];
+
   const modelName = "gemini-flash-latest";
   const apiVersion = "v1beta";
   
-  const prompt = `너는 세상에서 가장 창의적이고 무해한 장난을 설계하는 '조지기 마스터'야. 
-  20대 사용자가 친구나 직장 동료에게 할 수 있는 '킹받지만 웃음 터지는' 장난을 하나 추천해줘. 
-  준비물, 실행 단계, 그리고 걸렸을 때의 변명까지 세트로 알려줘. 
-  말투는 장난끼 넘치고 친근하게 해줘.`;
+  // 프롬프트 강화
+  const prompt = `
+  너는 세상에서 가장 창의적이고 무해한 장난을 설계하는 '조지기 마스터'야. 
+  
+  [요청 내용]
+  - 타겟: ${target}
+  - 장난 강도: ${intensity} (${intensityDesc})
+  
+  [지시사항]
+  위 조건에 맞춰 타겟에게 할 수 있는 기발한 장난을 하나 추천해줘.
+  반드시 **물리적 상해, 불법 행위, 심각한 괴롭힘은 절대 제외**하고, 유쾌하거나 킹받는 선을 지켜야 해.
+  
+  [출력 형식]
+  1. 작전명: (센스 있는 제목)
+  2. 준비물:
+  3. 실행 단계: (1, 2, 3... 순서대로 구체적으로)
+  4. 예상 반응 및 대처법:
+  5. 걸렸을 때의 변명:
+  
+  말투는 장난끼 넘치고 친근하게(반말) 해줘.`;
 
   try {
     const geminiUrl = `https://generativelanguage.googleapis.com/${apiVersion}/models/${modelName}:generateContent?key=${apiKey}`;

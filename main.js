@@ -5,6 +5,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const loading = document.getElementById('loading');
   const retryBtn = document.getElementById('retryBtn');
 
+  // State
+  let state = {
+    target: '친구',
+    intensity: 'mild'
+  };
+
+  // Setup Selection Logic
+  setupSelection('targetGroup', (val) => state.target = val);
+  setupSelection('intensityGroup', (val) => state.intensity = val);
+
+  function setupSelection(groupId, callback) {
+    const group = document.getElementById(groupId);
+    const buttons = group.querySelectorAll('.select-btn');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active from all siblings
+        buttons.forEach(b => b.classList.remove('active'));
+        // Add active to clicked
+        btn.classList.add('active');
+        // Update state
+        callback(btn.dataset.value);
+      });
+    });
+  }
+
   recommendBtn.addEventListener('click', fetchPrank);
   retryBtn.addEventListener('click', fetchPrank);
 
@@ -16,13 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
     retryBtn.classList.add('hidden');
     recommendBtn.disabled = true;
 
+    // Scroll to result
+    setTimeout(() => {
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
     try {
       const response = await fetch('/api/recommend', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          target: state.target,
+          intensity: state.intensity
+        })
       });
 
       if (response.status === 404) {
-        throw new Error("API 엔드포인트를 찾을 수 없습니다. (로컬 환경에서는 'wrangler pages dev'가 필요하거나 배포 후 동작합니다)");
+        throw new Error("API 엔드포인트를 찾을 수 없습니다.");
       }
 
       if (!response.ok) {
@@ -32,16 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await response.json();
       
-      // Simple typing effect or just show text
+      // Update Text
       resultText.textContent = data.recommendation;
       retryBtn.classList.remove('hidden');
 
     } catch (error) {
       console.error(error);
       resultText.innerHTML = `<div style="color:red; text-align:center;">
-        <strong>⚠️ 오류 발생!</strong><br>
+        <strong>⚠️ 작전 수립 실패!</strong><br>
         ${error.message}<br><br>
-        <em>Cloudflare Pages에 배포되었는지, 또는 로컬에서 Wrangler를 사용 중인지 확인해주세요.</em>
       </div>`;
     } finally {
       loading.classList.add('hidden');

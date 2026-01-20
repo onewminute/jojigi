@@ -1,9 +1,11 @@
 :root {
   --primary: #ff4757;
+  --primary-dark: #e84118;
   --secondary: #2f3542;
   --bg: #1e272e;
   --text: #f1f2f6;
   --accent: #ffa502;
+  --gray: #57606f;
 }
 
 body {
@@ -39,30 +41,68 @@ header p {
 .card {
   background: var(--secondary);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.5rem;
   margin: 2rem 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.icon-area {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 2s infinite;
+.section {
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
-.description {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  line-height: 1.5;
+.section h3 {
+  margin: 0 0 10px 0;
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+
+.btn-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.select-btn {
+  background-color: var(--bg);
+  border: 2px solid var(--gray);
+  color: #a4b0be;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.select-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.select-btn.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+  transform: scale(1.05);
+}
+
+.divider {
+  height: 2px;
+  background-color: var(--gray);
+  margin: 20px 0;
+  opacity: 0.3;
 }
 
 .btn-primary {
+  width: 100%;
   background-color: var(--primary);
   color: white;
   border: none;
-  padding: 1rem 2rem;
+  padding: 1rem;
   font-size: 1.5rem;
-  border-radius: 50px;
+  border-radius: 12px;
   cursor: pointer;
   font-family: 'Black Han Sans', sans-serif;
   transition: transform 0.1s, box-shadow 0.1s;
@@ -72,6 +112,13 @@ header p {
 .btn-primary:active {
   transform: translateY(4px);
   box-shadow: none;
+}
+
+.btn-primary:disabled {
+  background-color: var(--gray);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-secondary {
@@ -110,6 +157,8 @@ header p {
   color: var(--primary);
   margin-top: 0;
   text-align: center;
+  border-bottom: 2px dashed #ddd;
+  padding-bottom: 10px;
 }
 
 #loading {
@@ -132,11 +181,7 @@ header p {
   font-family: sans-serif;
   line-height: 1.6;
   white-space: pre-wrap;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  word-break: keep-all;
 }
 
 @keyframes spin {
@@ -145,4 +190,11 @@ header p {
 
 .hidden {
   display: none !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 400px) {
+  .btn-group {
+    grid-template-columns: 1fr 1fr;
+  }
 }
