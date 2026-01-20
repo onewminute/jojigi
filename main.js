@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = t.headerTitle; // Simple title
     const url = getShareUrl();
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-    window.open(twitterUrl, '_blank');
+    openInNewTab(twitterUrl);
   }
 
   function shareReddit() {
@@ -301,6 +301,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = t.headerTitle;
     const url = getShareUrl();
     const redditUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
-    window.open(redditUrl, '_blank');
+    openInNewTab(redditUrl);
+  }
+
+  function openInNewTab(url) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 });
