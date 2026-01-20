@@ -29,9 +29,9 @@ export async function onRequest(context) {
     });
   }
 
-  // 1차 시도: v1beta 버전의 gemini-1.5-flash
-  const modelName = "gemini-1.5-flash";
-  const apiVersion = "v1beta"; // v1beta가 보통 가장 많은 모델을 지원함
+  // 진단 결과 확인된 사용 가능한 모델: gemini-2.0-flash
+  const modelName = "gemini-2.0-flash";
+  const apiVersion = "v1beta";
   
   const prompt = `너는 세상에서 가장 창의적이고 무해한 장난을 설계하는 '조지기 마스터'야. 
   20대 사용자가 친구나 직장 동료에게 할 수 있는 '킹받지만 웃음 터지는' 장난을 하나 추천해줘. 
@@ -50,34 +50,12 @@ export async function onRequest(context) {
     });
 
     if (!response.ok) {
-      // 에러 발생 시 상세 정보 수집
       const errText = await response.text();
-      let debugInfo = `Error ${response.status}: ${errText}`;
-
-      // 404 에러라면(모델 못 찾음), 사용 가능한 모델 목록을 조회해서 알려줌
-      if (response.status === 404) {
-        try {
-          const listUrl = `https://generativelanguage.googleapis.com/${apiVersion}/models?key=${apiKey}`;
-          const listResp = await fetch(listUrl);
-          if (listResp.ok) {
-            const listData = await listResp.json();
-            const availableModels = listData.models
-              ? listData.models.map(m => m.name).filter(n => n.includes('gemini')).join(", ")
-              : "없음";
-            debugInfo += `\n\n[진단 결과] 사용 가능한 모델 목록: ${availableModels}`;
-          } else {
-             debugInfo += `\n\n[진단 실패] 모델 목록 조회도 실패했습니다. API Key가 올바른지 확인해주세요.`;
-          }
-        } catch (listErr) {
-          debugInfo += `\n\n[진단 오류] ${listErr.message}`;
-        }
-      }
-      
-      throw new Error(debugInfo);
+      throw new Error(`Gemini API Error (${response.status}): ${errText}`);
     }
 
     const data = await response.json();
-    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || "생성된 내용이 없습니다.";
+    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || "조지기 마스터가 아이디어가 고갈됐나봐. 다시 시도해봐!";
 
     return new Response(JSON.stringify({ recommendation: generatedText }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
