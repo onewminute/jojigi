@@ -19,10 +19,36 @@ body {
   padding: 20px;
 }
 
+/* Lang Switcher */
+.lang-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+#langBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--gray);
+  color: var(--text);
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+#langBtn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
 .container {
   max-width: 600px;
   width: 100%;
   text-align: center;
+  margin-top: 40px; /* Space for lang button on mobile */
 }
 
 header h1 {

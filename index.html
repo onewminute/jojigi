@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>조지기 마스터 - 장난 추천기</title>
+  <title>조지기 마스터 - Prank Master</title>
   <link href='/style.css' rel='stylesheet'>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,10 +13,14 @@
   <meta name="google-adsense-account" content="ca-pub-4212516457061876">
 </head>
 <body>
+  <div class="lang-switch">
+    <button id="langBtn">🇺🇸 English</button>
+  </div>
+
   <div class="container">
     <header>
-      <h1>😈 조지기 마스터</h1>
-      <p>오늘 뭐 조질까? 고민하지 마!</p>
+      <h1 id="headerTitle">😈 조지기 마스터</h1>
+      <p id="headerDesc">오늘 뭐 조질까? 고민하지 마!</p>
     </header>
 
     <main>
@@ -24,22 +28,23 @@
         
         <!-- 1. 대상 선택 -->
         <div class="section">
-          <h3>🎯 누구를 조질까?</h3>
+          <h3 id="targetTitle">🎯 누구를 조질까?</h3>
           <div class="btn-group" id="targetGroup">
-            <button class="select-btn active" data-value="친구">친구</button>
-            <button class="select-btn" data-value="직장동료">직장동료</button>
-            <button class="select-btn" data-value="연인">연인</button>
-            <button class="select-btn" data-value="가족">가족</button>
+            <!-- data-value는 내부 로직용(불변), 텍스트는 JS로 변경 -->
+            <button class="select-btn active" data-value="친구"><span data-t="friend">친구</span></button>
+            <button class="select-btn" data-value="직장동료"><span data-t="coworker">직장동료</span></button>
+            <button class="select-btn" data-value="연인"><span data-t="partner">연인</span></button>
+            <button class="select-btn" data-value="가족"><span data-t="family">가족</span></button>
           </div>
         </div>
 
         <!-- 2. 매운맛 선택 -->
         <div class="section">
-          <h3>🔥 장난 강도 (매운맛)</h3>
+          <h3 id="intensityTitle">🔥 장난 강도 (매운맛)</h3>
           <div class="btn-group" id="intensityGroup">
-            <button class="select-btn active" data-value="mild">😇 착한맛</button>
-            <button class="select-btn" data-value="medium">😏 중간맛</button>
-            <button class="select-btn" data-value="spicy">🥵 매운맛</button>
+            <button class="select-btn active" data-value="mild"><span data-t="mild">😇 착한맛</span></button>
+            <button class="select-btn" data-value="medium"><span data-t="medium">😏 중간맛</span></button>
+            <button class="select-btn" data-value="spicy"><span data-t="spicy">🥵 매운맛</span></button>
           </div>
         </div>
 
@@ -51,10 +56,10 @@
       </div>
 
       <div id="resultArea" class="result-card hidden">
-        <h2>📜 조지기 작전 계획서</h2>
+        <h2 id="resultTitle">📜 조지기 작전 계획서</h2>
         <div id="loading" class="hidden">
           <span class="spinner"></span>
-          <p>상황 분석 중... (사악한 웃음)</p>
+          <p id="loadingText">상황 분석 중... (사악한 웃음)</p>
         </div>
         <div id="resultText" class="markdown-body"></div>
         <button id="retryBtn" class="btn-secondary hidden">다른 작전 줘</button>
