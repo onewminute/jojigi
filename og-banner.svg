@@ -1,0 +1,22 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1e272e"/>
+  
+  <!-- Background Decorations -->
+  <circle cx="150" cy="500" r="250" fill="#ff4757" fill-opacity="0.05"/>
+  <circle cx="1050" cy="150" r="200" fill="#ffa502" fill-opacity="0.05"/>
+  
+  <!-- Mascot -->
+  <text x="600" y="200" font-size="100" text-anchor="middle" style="filter: drop-shadow(0 0 20px rgba(255, 71, 87, 0.4));">😈</text>
+  
+  <!-- Main Title -->
+  <text x="600" y="320" font-family="sans-serif" font-weight="900" font-size="72" fill="#ff4757" text-anchor="middle" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">조지기 마스터</text>
+  
+  <!-- English Subtitle -->
+  <text x="600" y="390" font-family="sans-serif" font-weight="bold" font-size="36" fill="#ffffff" text-anchor="middle" letter-spacing="2">PRANK MASTER</text>
+  
+  <!-- Tagline -->
+  <text x="600" y="480" font-family="sans-serif" font-size="28" fill="#ced6e0" text-anchor="middle">지루한 일상에 매운맛 한 스푼!</text>
+  
+  <!-- Border -->
+  <rect x="20" y="20" width="1160" height="590" rx="20" stroke="#ffa502" stroke-width="4" stroke-opacity="0.3" fill="none"/>
+</svg>
