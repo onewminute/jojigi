@@ -1,1 +1,148 @@
-/* Add styles here */
+:root {
+  --primary: #ff4757;
+  --secondary: #2f3542;
+  --bg: #1e272e;
+  --text: #f1f2f6;
+  --accent: #ffa502;
+}
+
+body {
+  font-family: 'Do Hyeon', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+header h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3rem;
+  color: var(--primary);
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #a4b0be;
+}
+
+.card {
+  background: var(--secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.icon-area {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Black Han Sans', sans-serif;
+  transition: transform 0.1s, box-shadow 0.1s;
+  box-shadow: 0 4px 0 #b33939;
+}
+
+.btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--text);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.result-card {
+  background: #fff;
+  color: #333;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+  margin-top: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+  border: 4px solid var(--accent);
+}
+
+.result-card.hidden {
+  display: none;
+}
+
+.result-card h2 {
+  color: var(--primary);
+  margin-top: 0;
+  text-align: center;
+}
+
+#loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0,0,0,0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none !important;
+}
