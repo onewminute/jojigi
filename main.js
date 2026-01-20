@@ -85,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial UI Update
   updateUI();
+  
+  // Check and Show Cookie Consent
+  checkCookieConsent();
 
   function setupSelection(groupId, callback) {
     const group = document.getElementById(groupId);
@@ -97,6 +100,36 @@ document.addEventListener('DOMContentLoaded', () => {
         callback(btn.dataset.value);
       });
     });
+  }
+
+  function checkCookieConsent() {
+    if (!localStorage.getItem('cookieConsent')) {
+      const banner = document.createElement('div');
+      banner.id = 'cookieConsent';
+      const isEn = state.lang === 'en';
+      
+      banner.innerHTML = `
+        <p>${isEn 
+          ? 'We use cookies to improve your experience and display ads. By continuing to use this site, you agree to our use of cookies.' 
+          : '우리는 더 나은 경험과 광고 제공을 위해 쿠키를 사용합니다. 사이트를 계속 이용하면 쿠키 사용에 동의하는 것으로 간주합니다.'}</p>
+        <div class="btn-container">
+          <button id="rejectCookies">${isEn ? 'Close' : '닫기'}</button>
+          <button id="acceptCookies">${isEn ? 'Accept' : '동의'}</button>
+        </div>
+      `;
+      
+      document.body.appendChild(banner);
+
+      document.getElementById('acceptCookies').onclick = () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        banner.remove();
+      };
+
+      document.getElementById('rejectCookies').onclick = () => {
+        localStorage.setItem('cookieConsent', 'rejected'); // Still store choice to avoid spamming
+        banner.remove();
+      };
+    }
   }
 
   function toggleLanguage() {
