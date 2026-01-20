@@ -23,7 +23,8 @@ const translations = {
     langBtn: "🇺🇸 English",
     copyBtn: "복사",
     shareBtn: "공유",
-    twitterBtn: "트윗",
+    twitterBtn: "X (트윗)",
+    redditBtn: "레딧",
     copySuccess: "클립보드에 복사되었습니다!",
     shareTitle: "조지기 마스터 - 작전명: "
   },
@@ -58,7 +59,8 @@ const translations = {
     privacyLink: "Privacy Policy",
     copyBtn: "Copy",
     shareBtn: "Share",
-    twitterBtn: "Tweet",
+    twitterBtn: "X (Tweet)",
+    redditBtn: "Reddit",
     copySuccess: "Copied to clipboard!",
     shareTitle: "Prank Master - Operation: "
   }
@@ -75,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyBtn = document.getElementById('copyBtn');
   const nativeShareBtn = document.getElementById('nativeShareBtn');
   const twitterShareBtn = document.getElementById('twitterShareBtn');
+  const redditShareBtn = document.getElementById('redditShareBtn');
 
   // Detect initial language
   const urlParams = new URLSearchParams(window.location.search);
@@ -101,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   copyBtn.addEventListener('click', copyToClipboard);
   nativeShareBtn.addEventListener('click', shareNative);
   twitterShareBtn.addEventListener('click', shareTwitter);
+  redditShareBtn.addEventListener('click', shareReddit);
 
   // Initial UI Update
   updateUI();
@@ -290,6 +294,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function shareTwitter() {
     const text = getShareText();
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  }
+
+  function shareReddit() {
+    const rawText = resultText.innerText;
+    const t = translations[state.lang];
+    const title = t.shareTitle.replace(': ', '');
+    const url = `https://www.reddit.com/submit?title=${encodeURIComponent(title)}&text=${encodeURIComponent(rawText + '\n\n👉 https://jojigi.pages.dev/?lang=' + state.lang)}`;
     window.open(url, '_blank');
   }
 });

@@ -370,8 +370,19 @@ footer {
 }
 
 .share-btn.twitter:hover {
-  background: #1d9bf0; /* X/Twitter Blue */
+  background: #1d9bf0; /* X/Twitter Blue - keeping blue hover for contrast or use black/dark gray */
   border-color: #1d9bf0;
+}
+
+.share-btn.reddit {
+  background: #ff4500; /* Reddit Orange */
+  border-color: #e03d00;
+  color: white;
+}
+
+.share-btn.reddit:hover {
+  background: #ff5700;
+  border-color: #ff5700;
 }
 
 /* Cookie Consent Banner */
