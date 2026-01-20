@@ -29,8 +29,8 @@ export async function onRequest(context) {
     });
   }
 
-  // 진단 결과 확인된 사용 가능한 모델: gemini-2.0-flash
-  const modelName = "gemini-2.0-flash";
+  // 진단 목록에 있었던 안정적인 모델 별칭 사용
+  const modelName = "gemini-flash-latest";
   const apiVersion = "v1beta";
   
   const prompt = `너는 세상에서 가장 창의적이고 무해한 장난을 설계하는 '조지기 마스터'야. 
